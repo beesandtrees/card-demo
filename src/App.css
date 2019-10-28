@@ -1,6 +1,6 @@
 body {
   font-family: 'Nunito', sans-serif;
-  padding: 30px 0;
+  padding: 0;
 }
 
 .App {
@@ -12,5 +12,68 @@ h1 {
   font-size: 72px;
   color: #ff8300;
   letter-spacing: 4px;
+  margin: 3rem auto 0;
   text-shadow: 0px 0px 16px purple;
+}
+
+nav {
+  align-items: center;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  margin: 0 auto 3rem;
+  max-width: 80%;
+}
+
+.button {
+  border: 1px solid purple;
+  border-radius: 3px;
+  display: block;
+  height: 40px;
+  margin: 0;
+  padding: 0 2rem;
+  text-align: center;
+  min-width: 40px;
+}
+
+.button:hover {
+  background: #d2b2fb;
+  cursor: pointer;
+}
+
+.label {
+  color: white;
+  margin: 0 1rem 0 0;
+}
+
+.toggle {
+  border: 1px solid purple;
+  display: flex;
+  margin: 0 2rem 0 0;
+}
+
+.toggle button {
+  border: 1px solid purple;
+  border-right: none;
+  border-radius: 3px 0 0 3px;
+  display: block;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 40px;
+}
+
+.toggle button.active {
+  background: deeppink;
+  color: white;
+}
+
+.toggle button+button {
+  border-radius: 0;
+}
+
+.toggle button:last-child {
+  border-radius: 0 3px 3px 0;
+  border-right: 1px solid purple;
 }
