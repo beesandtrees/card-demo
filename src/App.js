@@ -38,7 +38,7 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>Monster Rolodex</h1>
+          <h1>Monster Issues</h1>
         </header>
         <nav>
           <SearchBox

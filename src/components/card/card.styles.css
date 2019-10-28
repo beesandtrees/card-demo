@@ -1,10 +1,12 @@
 .card-container {
   display: flex;
   flex-direction: column;
-  background-color: #FFC107;
+  background-color: #fde224;
   border: 1px solid #ff8300;
+  border-top-width: 2rem;
   border-radius: 5px;
   padding: 25px;
+  position: relative;
   cursor: pointer;
   -moz-osx-font-smoothing: grayscale;
   backface-visibility: hidden;
@@ -12,6 +14,45 @@
   transition: transform 0.25s ease-out;
 }
 
+.card-status-1 {
+  border-color: #82cc00;
+}
+
+.card-status-2 {
+  border-color: #350092;
+}
+
 .card-container:hover {
   transform: scale(1.05);
+}
+
+.status {
+  font-weight: 900;
+  position: absolute;
+  left: 24px;
+  top: -24px;
+  text-transform: uppercase;
+}
+
+.date {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.date span {
+  font-weight: 600;
+}
+
+.card-status-2 .status {
+  color: white;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+h2+p {
+  font-size: 14px;
+  margin-top: 0;
 }
