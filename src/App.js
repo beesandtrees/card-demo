@@ -8,109 +8,155 @@ class App extends Component {
     super();
 
     this.state = {
-      filteredMonsters: [],
-      monsters: []
+      filteredData: [],
+      filter: null,
+      order: null,
+      data: []
     };
   }
 
   componentDidMount() {
     fetch(
-      'https://my-json-server.typicode.com/beesandtrees/typicode-json/users'
+      'https://my-json-server.typicode.com/beesandtrees/typicode-json/rooms'
     )
       .then(res => res.json())
-      .then(users =>
+      .then(rooms =>
         this.setState({
-          filteredMonsters: users,
-          monsters: users,
+          filteredData: rooms,
+          data: rooms,
+          filter: null,
           order: null
         })
       )
       .catch(err => console.log(err));
   }
 
-  filterByName = e => {
-    const filteredMonsters = this.state.monsters.filter(m =>
-      m.name.toLowerCase().includes(e.target.value.toLowerCase())
+  filterByString = (e, string) => {
+    const filteredData = this.state.data.filter(m =>
+      m[string].toLowerCase().includes(e.target.value.toLowerCase())
     );
 
-    this.setState({ filteredMonsters });
+    this.setState({ filteredData, filter: 'tail_no' });
   };
 
-  filterByStatus = e => {
-    const status = ['unassigned', 'in progress', 'complete'];
-    const filteredMonsters = this.state.monsters.filter(m =>
-      status[m.status].includes(e.target.value.toLowerCase())
+  filterByStatus = status => {
+    const filteredData = this.state.data.filter(
+      m => m.status === status || m.assignment.status === status
     );
 
-    this.setState({ filteredMonsters });
+    this.setState({ filteredData, filter: status });
   };
 
-  orderByStatus = e => {
-    const filteredMonsters = this.state.monsters
+  filterWatching = () => {
+    const filteredData = this.state.data.filter(m => m.watching);
+
+    this.setState({ filteredData, filter: 'Watching' });
+  };
+
+  orderByStatus = (e, order) => {
+    const filteredData = this.state.data
       .slice(0)
       .sort((m, n) => m.status - n.status);
 
-    this.setState({ filteredMonsters, order: 'up' });
+    this.setState({ filteredData, order });
   };
 
-  orderByReverseStatus = e => {
-    const filteredMonsters = this.state.monsters
-      .slice(0)
-      .sort((m, n) => n.status - m.status);
-
-    this.setState({ filteredMonsters, order: 'down' });
-  };
-
-  resetMonsters = () => {
-    this.setState({ filteredMonsters: this.state.monsters, order: null });
+  resetData = () => {
+    this.setState({ filteredData: this.state.data, order: null, filter: null });
   };
 
   render() {
-    const { filteredMonsters, order } = this.state;
+    const { filteredData, filter } = this.state;
 
     return (
       <div className="App">
         <header>
-          <h1>Monster Issues</h1>
+          <h1>Issue Tracker</h1>
         </header>
-        <nav>
-          <span className="label">Order by Status</span>
-          <div className="toggle">
-            <button
-              className={order === 'up' ? 'button active' : 'button'}
-              onClick={this.orderByStatus}
-            >
-              ▲
-            </button>
-            <button
-              className={order === 'down' ? 'button active' : 'button'}
-              onClick={this.orderByReverseStatus}
-            >
-              ▼
-            </button>
-            <button
-              className={order === null ? 'button active' : 'button'}
-              onClick={this.resetMonsters}
-            >
-              ✖
-            </button>
-          </div>
-
-          <SearchBox
-            handleChange={this.filterByName}
-            placeholder="Search By Name"
-          />
-
-          <SearchBox
-            handleChange={this.filterByStatus}
-            placeholder="Search By Status"
-          />
-          <button className="button" onClick={this.resetMonsters}>
-            Reset
-          </button>
-        </nav>
         <main>
-          <CardList monsters={filteredMonsters} />
+          <div className="filter-bar">
+            <nav>
+              <section>
+                <h3>Search</h3>
+                <SearchBox
+                  handleChange={e => this.filterByString(e, 'tail_no')}
+                  placeholder="Search By Name"
+                />
+              </section>
+              <section>
+                <h3>Filter</h3>
+                <button
+                  className={filter === null ? 'button active' : 'button'}
+                  onClick={this.resetData}
+                >
+                  All
+                </button>
+                <button
+                  className={
+                    filter === 'Unassigned' ? 'button active' : 'button'
+                  }
+                  onClick={() => this.filterByStatus('Unassigned')}
+                >
+                  Unassigned
+                </button>
+                <button
+                  className={
+                    filter === 'In Progress' ? 'button active' : 'button'
+                  }
+                  onClick={() => this.filterByStatus('In Progress')}
+                >
+                  In Progress
+                </button>
+                <button
+                  className={filter === 'Watching' ? 'button active' : 'button'}
+                  onClick={this.filterWatching}
+                >
+                  Watching
+                </button>
+                <button
+                  className={
+                    filter === 'Read-Only' ? 'button active' : 'button'
+                  }
+                  onClick={() => this.filterByStatus('Read-Only')}
+                >
+                  Sabre
+                </button>
+              </section>
+              <section>
+                <h3>Filter Location</h3>
+                <SearchBox
+                  handleChange={e => this.filterByString(e, 'location')}
+                  placeholder="Search By Location"
+                />
+              </section>
+            </nav>
+          </div>
+          <div className="cards">
+            {/* <section>
+              <span className="label">Sort By Status</span>
+              <div className="toggle">
+                <button
+                  className={order === 'up' ? 'button active' : 'button'}
+                  onClick={this.orderByStatus}
+                >
+                  ▲
+                </button>
+                <button
+                  className={order === 'down' ? 'button active' : 'button'}
+                  onClick={this.orderByReverseStatus}
+                >
+                  ▼
+                </button>
+                <button
+                  className={order === null ? 'button active' : 'button'}
+                  onClick={this.resetMonsters}
+                >
+                  ✖
+                </button>
+              </div>
+            </section> */}
+            <CardList data={filteredData} />
+          </div>
         </main>
       </div>
     );

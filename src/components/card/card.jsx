@@ -2,44 +2,33 @@ import React from 'react';
 
 import './card.styles.css';
 
-const status = ['unassigned', 'in progress', 'complete'];
-
-const Image = ({ name, status, id }) => {
-  const imgStr =
-    status === 0
-      ? 'https://via.placeholder.com/180'
-      : `https://robohash.org/${id}?set=set2&size=180x180`;
-
-  return <img alt={name} src={imgStr} />;
-};
-
-const Assignment = ({ email, name, status }) => {
+const Details = ({ description, status }) => {
   if (status === 0) {
     return <h2>Unassigned</h2>;
   }
 
-  return (
-    <>
-      <h2>
-        <span>Assigned to:</span> {name}
-      </h2>
-      <p>{email}</p>
-    </>
-  );
+  return <p>{description}</p>;
 };
 
-const Card = ({ monster }) => (
-  <li className={`card-container card-status-${monster.status}`}>
-    <span className="status">{status[monster.status]}</span>
-    <span className="date">
-      <span>Created:</span> {monster.created}
+const Card = ({ data }) => (
+  <li
+    className={`card-container card-status-${data.assignment.status.toLowerCase()}`}
+  >
+    <span className="status">
+      <span>{data.assignment.status.toLowerCase()}</span>
+      <span>{data.location}</span>
     </span>
-    <Image name={monster.name} status={monster.status} id={monster.id} />
-    <Assignment
-      name={monster.name}
-      email={monster.email}
-      status={monster.status}
-    />
+    <h2>{data.tail_no}</h2>
+    <span>Avg work time: {data.work_time}</span>
+    <hr />
+    <Details description={data.description} status={data.status} />
+    {data.watching && (
+      <div className="watching">
+        <span role="image" aria-label="watching">
+          👁️
+        </span>
+      </div>
+    )}
   </li>
 );
 

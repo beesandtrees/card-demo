@@ -4,69 +4,97 @@ body {
 }
 
 .App {
-  text-align: center;
+  text-align: left;
+}
+
+header {
+  border-bottom: 2px solid #333;
+  padding: 0 2rem;
 }
 
 h1 {
-  font-family: 'Creepster', cursive;
-  font-size: 72px;
-  color: #ff8300;
+  font-family: 'Nunito', cursive;
+  font-size: 48px;
+  color: #333;
   letter-spacing: 4px;
-  margin: 3rem auto 0;
-  text-shadow: 0px 0px 16px purple;
+  margin: 0 auto 0;
+}
+
+h3 {
+  border-bottom: 2px solid #333;
+  display: block;
+  margin: 0 0 1rem;
+  width: 100%;
+}
+
+main {
+  display: flex;
+}
+
+.filter-bar {
+  border-right: 2px solid black;
+  padding: 1rem;
+  width: 240px;
+}
+
+.cards {
+  flex: 1;
+  padding: 1rem 2rem;
 }
 
 nav {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
-  height: 60px;
-  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
   margin: 0 auto 3rem;
-  max-width: 80%;
+}
+
+nav section {
+  margin-bottom: 2rem;
+  width: 100%;
 }
 
 .button {
-  border: 1px solid purple;
+  border: 1px solid #333;
   border-radius: 3px;
-  display: block;
-  height: 40px;
-  margin: 0;
-  padding: 0 2rem;
+  display: inline-block;
+  height: 2rem;
+  margin: 0 0.5rem 1rem 0;
+  padding: 0 0.5rem;
   text-align: center;
-  min-width: 40px;
 }
 
 .button:hover {
-  background: #d2b2fb;
+  background: #f2f2f2;
   cursor: pointer;
 }
 
 .label {
-  color: white;
+  color: #333;
   margin: 0 1rem 0 0;
 }
 
 .toggle {
-  border: 1px solid purple;
   display: flex;
-  margin: 0 2rem 0 0;
+  margin: 0 2rem 2rem 0;
 }
 
 .toggle button {
-  border: 1px solid purple;
+  border: 1px solid #333;
   border-right: none;
   border-radius: 3px 0 0 3px;
   display: block;
-  height: 40px;
+  height: 30px;
   margin: 0;
   padding: 0;
   text-align: center;
   width: 40px;
 }
 
-.toggle button.active {
-  background: deeppink;
-  color: white;
+button.active {
+  background: #c0edf5;
 }
 
 .toggle button+button {
@@ -76,4 +104,10 @@ nav {
 .toggle button:last-child {
   border-radius: 0 3px 3px 0;
   border-right: 1px solid purple;
+}
+
+hr {
+  border-color: #333;
+  margin: 1rem 0;
+  width: 100%;
 }
