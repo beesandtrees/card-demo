@@ -144,8 +144,18 @@ class App extends Component {
           </div>
           <div className="cards">
             <div className="toggle">
-              <button onClick={this.toggleView}>Card View</button>
-              <button onClick={this.toggleView}>Table View</button>
+              <button
+                className={viewCards ? 'button active' : 'button'}
+                onClick={this.toggleView}
+              >
+                Card View
+              </button>
+              <button
+                className={!viewCards ? 'button active' : 'button'}
+                onClick={this.toggleView}
+              >
+                Table View
+              </button>
             </div>
             <DataView cards={viewCards} filteredData={filteredData} />
           </div>

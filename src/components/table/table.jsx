@@ -8,8 +8,7 @@ const Table = props => (
   <table>
     <thead>
       <tr className="row1">
-        <td>id</td>
-        <td>tail no</td>
+        <td>Issue Id</td>
         <td>Status</td>
         <td>Progress</td>
         <td>Location</td>

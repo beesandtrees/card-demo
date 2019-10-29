@@ -18,7 +18,7 @@ const TableRow = props => {
           if (key === 'watching') {
             value = props.data[key] ? '✔️' : '';
           }
-          if (key === 'comments') {
+          if (key === 'comments' || key === 'id') {
             return null;
           }
           return (

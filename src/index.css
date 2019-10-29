@@ -13,3 +13,57 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.button {
+  border: 1px solid #333;
+  border-radius: 3px;
+  display: inline-block;
+  height: 2rem;
+  margin: 0 0.5rem 1rem 0;
+  padding: 0 0.5rem;
+  text-align: center;
+}
+
+.button:hover {
+  background: #f2f2f2;
+  cursor: pointer;
+}
+
+.login-page label {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.login-page {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.login {
+  border: 1px solid #333;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 200px;
+  padding: 0;
+  width: 200px;
+}
+
+.pass {
+  -webkit-appearance: none;
+  border: 1px solid darkBlue;
+  border-radius: 3px;
+  line-height: 30px;
+  margin: 0 0 1rem 0;
+  outline: none;
+  padding: 4px 12px;
+  width: 150px;
+}
