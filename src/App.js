@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { CardList, SearchBox } from './components';
+import { CardList, SearchBox, Table } from './components';
+
+const DataView = ({ cards, filteredData }) => {
+  if (cards) {
+    return <CardList data={filteredData} />;
+  } else {
+    return <Table data={filteredData} />;
+  }
+};
 
 class App extends Component {
   constructor() {
@@ -11,7 +19,8 @@ class App extends Component {
       filteredData: [],
       filter: null,
       order: null,
-      data: []
+      data: [],
+      viewCards: true
     };
   }
 
@@ -61,12 +70,14 @@ class App extends Component {
     this.setState({ filteredData, order });
   };
 
+  toggleView = () => this.setState({ viewCards: !this.state.viewCards });
+
   resetData = () => {
     this.setState({ filteredData: this.state.data, order: null, filter: null });
   };
 
   render() {
-    const { filteredData, filter } = this.state;
+    const { filteredData, filter, viewCards } = this.state;
 
     return (
       <div className="App">
@@ -132,30 +143,11 @@ class App extends Component {
             </nav>
           </div>
           <div className="cards">
-            {/* <section>
-              <span className="label">Sort By Status</span>
-              <div className="toggle">
-                <button
-                  className={order === 'up' ? 'button active' : 'button'}
-                  onClick={this.orderByStatus}
-                >
-                  ▲
-                </button>
-                <button
-                  className={order === 'down' ? 'button active' : 'button'}
-                  onClick={this.orderByReverseStatus}
-                >
-                  ▼
-                </button>
-                <button
-                  className={order === null ? 'button active' : 'button'}
-                  onClick={this.resetMonsters}
-                >
-                  ✖
-                </button>
-              </div>
-            </section> */}
-            <CardList data={filteredData} />
+            <div className="toggle">
+              <button onClick={this.toggleView}>Card View</button>
+              <button onClick={this.toggleView}>Table View</button>
+            </div>
+            <DataView cards={viewCards} filteredData={filteredData} />
           </div>
         </main>
       </div>

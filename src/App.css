@@ -88,9 +88,10 @@ nav section {
   display: block;
   height: 30px;
   margin: 0;
-  padding: 0;
+  padding: 0 20px;
   text-align: center;
-  width: 40px;
+  white-space: nowrap;
+  min-width: 40px;
 }
 
 button.active {
